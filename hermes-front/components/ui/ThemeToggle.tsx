@@ -10,7 +10,6 @@ export function ThemeToggle() {
       variant="outline"
       size="icon"
       onClick={toggleTheme}
-      className="fixed top-4 right-4"
     >
       {theme === 'light' ? (
         <Moon className="h-5 w-5" />
