@@ -1,3 +1,6 @@
 hermes-front/.next
 hermes-front/node_modules
 *.env
+hermes-api/bin
+hermes-api/obj
+.vscode
