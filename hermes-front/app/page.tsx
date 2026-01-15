@@ -1,14 +1,13 @@
 "use client"
 
 import dynamic from "next/dynamic";
-import Image from "next/image";
-import { useMemo } from "react";
-import { ThemeProvider, useGlobalTheme } from "./ThemeProvider";
+import { useGlobalTheme } from "./ThemeProvider";
+import HermesLoading from "@/components/HermesLoading";
 
 const Map = dynamic(
   () => import('@/components/Map'),
   { 
-    loading: () => <p>A map is loading</p>,
+    loading: () => <HermesLoading />,
     ssr: false 
   }
 );
