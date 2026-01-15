@@ -1,11 +1,10 @@
 "use client"
 import { Moon, Sun } from 'lucide-react'
 import { Button } from '@/components/shadcn/ui/button'
-import { useTheme } from '@/hooks/use-theme'
+import { useGlobalTheme } from '@/app/ThemeProvider'
 
 export function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme()
-
+  const { theme, toggleTheme } = useGlobalTheme()
   return (
     <Button
       variant="outline"

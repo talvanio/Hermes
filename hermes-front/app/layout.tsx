@@ -1,5 +1,6 @@
-import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import "./globals.css";
+import { ThemeProvider } from "./ThemeProvider";
 
 export default function RootLayout({
   children,
@@ -9,9 +10,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body>
-        <div>Hermes app home</div>
-        <ThemeToggle />
-        {children}
+        <ThemeProvider>
+          <div className="fixed top-4 right-4 z-[1000]">
+          <ThemeToggle />
+          </div>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
