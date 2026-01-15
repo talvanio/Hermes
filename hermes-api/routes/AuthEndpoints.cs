@@ -1,35 +1,30 @@
 public static class AuthEndpoints 
 {
-    private static string uncriptPassword(string encryptedPassword)
-    {
-        return encryptedPassword; // TODO: implement decryption
-    }
-
-    private static bool validateCredentials(LoginRequest credentials)
-    {
-        return true;  // TODO: implement validation
-    }
 
     public static void MapAuthRoutes(this IEndpointRouteBuilder app) 
     {
-        app.MapPost("/login", (LoginRequest credentials) => 
+        app.MapPost("/login", async (LoginRequest credentials, AuthService authService) => 
         {
-            string? password = uncriptPassword(credentials.password);
-            LoginRequest decryptedCredentials = new LoginRequest{username = credentials.username, password = password};
-            if (validateCredentials(decryptedCredentials))
+            if (await authService.AuthenticateAsync(credentials))
             {
-                return Results.Ok("jwt placeholder"); // TODO: jwt token generation
+                return Results.Ok("Login successful");
             }
-            else
-            {
-                return Results.Unauthorized();
-            
-            }
-
+            return Results.Unauthorized();
         })
         .Produces<string>(StatusCodes.Status200OK)
         .Produces(StatusCodes.Status401Unauthorized)
         .WithName("Login")
+        .WithTags("Authentication");
+
+
+        app.MapPost("/register", async (LoginRequest request, AuthService authService) => 
+        {
+            await authService.RegisterAsync(request.username, request.password);
+            
+            return Results.Created($"/users/{request.username}", null);
+        })
+        .Produces(StatusCodes.Status201Created)
+        .WithName("Register")
         .WithTags("Authentication");
 
         app.MapGet("/logout", () =>

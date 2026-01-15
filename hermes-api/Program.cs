@@ -3,6 +3,11 @@ using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationM
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddHermesDatabase(builder.Configuration);
+builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<AuthService>();
+
 builder.Services.AddOpenApi();
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
