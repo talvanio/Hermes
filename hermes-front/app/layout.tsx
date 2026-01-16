@@ -6,6 +6,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { Button } from "@/components/shadcn/ui/button";
 import { useRouter, usePathname } from 'next/navigation'
 import { LogOut } from 'lucide-react'
+import { Toaster } from "sonner";
 
 export default function RootLayout({
   children,
@@ -31,11 +32,10 @@ export default function RootLayout({
               <LogOut className="h-5 w-5" />
             </Button>
           }
-          
         <ThemeToggle />
-
           </div>
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
