@@ -1,5 +1,6 @@
 hermes-front/.next
 hermes-front/node_modules
+hermes-front/.env.local
 *.env
 hermes-api/bin
 hermes-api/obj
