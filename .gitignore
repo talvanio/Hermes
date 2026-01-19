@@ -1,7 +1,7 @@
 hermes-front/.next
 hermes-front/node_modules
 hermes-front/.env.local
-*.env
+*.env*
 hermes-api/bin
 hermes-api/obj
 .vscode
