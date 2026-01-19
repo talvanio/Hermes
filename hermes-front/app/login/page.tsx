@@ -26,7 +26,7 @@ export default function LoginScreen() {
             const data = Object.fromEntries(formData.entries()) as unknown as LoginCredentials;
             const jwtToken = await login(data);
             toast.success("Login Successful", {});
-            router.push("/");
+            router.push("/map");
             // TODO: persist jwt token
         } catch (error : any) {
             if (error.status == 401) 
