@@ -21,11 +21,7 @@ public class IdentityHandler
                 throw new InvalidOperationException("Username already exists.");
             }
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
-            var newUser = new User 
-            { 
-                Username = username, 
-                PasswordHash = hashedPassword 
-            };
+            User newUser = new User(username: username, passwordHash: hashedPassword);
             await _userRepository.AddAsync(newUser);
     }
 
