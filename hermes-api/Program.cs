@@ -16,7 +16,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddHermesDatabase(builder.Configuration);
-builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<IUserRepository, MongoUserRepository>();
 builder.Services.AddScoped<IdentityHandler>();
 
 builder.Services.AddOpenApi();

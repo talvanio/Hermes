@@ -1,7 +1,7 @@
 public class IdentityHandler
 {
-    private readonly UserRepository _userRepository;
-    public IdentityHandler(UserRepository userRepository)
+    private readonly IUserRepository _userRepository;
+    public IdentityHandler(IUserRepository userRepository)
     {
         _userRepository = userRepository;
     }

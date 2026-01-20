@@ -1,9 +1,9 @@
 using MongoDB.Driver;
 
-public class UserRepository : IUserRepository
+public class MongoUserRepository : IUserRepository
 {
     private readonly IMongoCollection<User> _collection;
-    public UserRepository(IMongoDatabase database)
+    public MongoUserRepository(IMongoDatabase database)
         {
             _collection = database.GetCollection<User>("users");
         }
