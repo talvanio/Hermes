@@ -1,20 +1,20 @@
-public class AuthService
+public class IdentityHandler
 {
     private readonly UserRepository _userRepository;
-    public AuthService(UserRepository userRepository)
+    public IdentityHandler(UserRepository userRepository)
     {
         _userRepository = userRepository;
     }
 
-    public async Task<bool> AuthenticateAsync(LoginRequest credentials)
+    public async Task<bool> HandleLoginAsync(UserPlainCredentialsDTO plainCredentials)
     {
-        User user = await _userRepository.GetUserByUsername(credentials.username);
+        User user = await _userRepository.GetUserByUsername(plainCredentials.Username);
         
         if (user == null) return false;
-        return BCrypt.Net.BCrypt.Verify(credentials.password, user.PasswordHash);
+        return BCrypt.Net.BCrypt.Verify(plainCredentials.Password, user.PasswordHash);
     }
 
-    public async Task RegisterAsync(string username, string password)
+    public async Task HandleRegisterAsync(string username, string password)
     {
             if (await _userRepository.GetUserByUsername(username) != null)
             {

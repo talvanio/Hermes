@@ -1,11 +1,11 @@
-public static class AuthEndpoints 
+public static class IdentityController 
 {
 
-    public static void MapAuthRoutes(this IEndpointRouteBuilder app) 
+    public static void MapIdentityRoutes(this IEndpointRouteBuilder app) 
     {
-        app.MapPost("/login", async (LoginRequest credentials, AuthService authService) => 
+        app.MapPost("/login", async (UserPlainCredentialsDTO plainCredentials, IdentityHandler identityHandler) => 
         {
-            if (await authService.AuthenticateAsync(credentials))
+            if (await identityHandler.HandleLoginAsync(plainCredentials))
             {
                 return Results.Ok("Login successful");
             }
@@ -17,11 +17,11 @@ public static class AuthEndpoints
         .WithTags("Authentication");
 
 
-        app.MapPost("/register", async (LoginRequest request, AuthService authService) => 
+        app.MapPost("/register", async (UserPlainCredentialsDTO plainCredentials, IdentityHandler identityHandler) => 
         {
-            await authService.RegisterAsync(request.username, request.password);
+            await identityHandler.HandleRegisterAsync(plainCredentials.Username, plainCredentials.Password);
             
-            return Results.Created($"/users/{request.username}", null);
+            return Results.Created($"/users/{plainCredentials.Username}", null);
         })
         .Produces(StatusCodes.Status201Created)
         .WithName("Register")

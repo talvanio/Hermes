@@ -17,7 +17,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddHermesDatabase(builder.Configuration);
 builder.Services.AddScoped<UserRepository>();
-builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<IdentityHandler>();
 
 builder.Services.AddOpenApi();
 
@@ -30,12 +30,6 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference();
 }
 
-app.MapAuthRoutes();
+app.MapIdentityRoutes();
 app.UseHttpsRedirection();
 app.Run();
-
-public record LoginRequest
-{
-    public required string username { get; init; }
-    public required string password { get; init; }
-}
