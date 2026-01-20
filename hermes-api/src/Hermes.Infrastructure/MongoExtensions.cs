@@ -15,8 +15,8 @@ public static class MongoExtensions
 
             var client = new MongoClient(settings);
             
-            services.AddSingleton<IMongoDatabase>(client.GetDatabase("HermesDB"));
-            
+            services.AddSingleton<IMongoClient>(client);
+            services.AddScoped(sp => client.GetDatabase("HermesDB"));            
             
             return services;
         }
