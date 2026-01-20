@@ -15,7 +15,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.AddHermesDatabase(builder.Configuration);
+builder.Services.InjectMongoDatabase(builder.Configuration);
 builder.Services.AddScoped<IUserRepository, MongoUserRepository>();
 builder.Services.AddScoped<IdentityHandler>();
 
