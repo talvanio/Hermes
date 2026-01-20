@@ -8,7 +8,7 @@ public class IdentityHandler
 
     public async Task<bool> HandleLoginAsync(UserPlainCredentialsDTO plainCredentials)
     {
-        User user = await _userRepository.GetUserByUsername(plainCredentials.Username);
+        User user = await _userRepository.GetByUsernameAsync(plainCredentials.Username);
         
         if (user == null) return false;
         return BCrypt.Net.BCrypt.Verify(plainCredentials.Password, user.PasswordHash);
@@ -16,7 +16,7 @@ public class IdentityHandler
 
     public async Task HandleRegisterAsync(string username, string password)
     {
-            if (await _userRepository.GetUserByUsername(username) != null)
+            if (await _userRepository.GetByUsernameAsync(username) != null)
             {
                 throw new InvalidOperationException("Username already exists.");
             }
@@ -26,7 +26,7 @@ public class IdentityHandler
                 Username = username, 
                 PasswordHash = hashedPassword 
             };
-            await _userRepository.CreateAsync(newUser);
+            await _userRepository.AddAsync(newUser);
     }
 
 }
