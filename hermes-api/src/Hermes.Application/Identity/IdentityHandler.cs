@@ -8,9 +8,9 @@ public class IdentityHandler
 
     public async Task<bool> HandleLoginAsync(UserPlainCredentialsDTO plainCredentials)
     {
-        User user = await _userRepository.GetByUsernameAsync(plainCredentials.Username);
+        User? user = await _userRepository.GetByUsernameAsync(plainCredentials.Username);
         
-        if (user == null) return false;
+        if (user == null) return false; // TODO: user doesn't exists exception
         return BCrypt.Net.BCrypt.Verify(plainCredentials.Password, user.PasswordHash);
     }
 

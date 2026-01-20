@@ -8,7 +8,7 @@ public class MongoUserRepository : IUserRepository
             _collection = database.GetCollection<User>("users");
         }
 
-    public async Task<User> GetByUsernameAsync(string username)
+    public async Task<User?> GetByUsernameAsync(string username)
     {
         return await _collection.Find(u => u.Username == username).FirstOrDefaultAsync();
     }
