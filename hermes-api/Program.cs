@@ -1,4 +1,10 @@
 using System.ComponentModel.DataAnnotations;
+using hermes_api.Hermes.Application.Identity;
+using hermes_api.Hermes.Infrastructure;
+using hermes_api.Hermes.Infrastructure.Repositories;
+using hermes_api.Hermes.Domain.Repositories;
+
+using hermes_api.Hermes.Presentation.Controllers.Identity;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 using Scalar.AspNetCore;
 

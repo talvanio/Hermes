@@ -1,4 +1,8 @@
+using hermes_api.Hermes.Domain.Entities;
+using hermes_api.Hermes.Domain.Repositories;
 using MongoDB.Driver;
+
+namespace hermes_api.Hermes.Infrastructure.Repositories;
 
 public class MongoUserRepository : IUserRepository
 {

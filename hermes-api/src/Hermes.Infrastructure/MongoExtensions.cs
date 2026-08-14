@@ -1,7 +1,10 @@
+using hermes_api.Hermes.Domain.Entities;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
+
+namespace hermes_api.Hermes.Infrastructure;
 
 public static class MongoExtensions
 {

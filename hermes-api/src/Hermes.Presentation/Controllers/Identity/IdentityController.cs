@@ -1,3 +1,6 @@
+using hermes_api.Hermes.Application.Identity;
+
+
 public static class IdentityController 
 {
 

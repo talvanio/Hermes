@@ -1,3 +1,5 @@
+namespace hermes_api.Hermes.Domain.Entities;
+
 public class User
 {
 

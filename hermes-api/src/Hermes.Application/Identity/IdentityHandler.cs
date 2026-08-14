@@ -1,3 +1,8 @@
+using hermes_api.Hermes.Domain.Entities;
+using hermes_api.Hermes.Domain.Repositories;
+
+namespace hermes_api.Hermes.Application.Identity;
+
 public class IdentityHandler
 {
     private readonly IUserRepository _userRepository;
