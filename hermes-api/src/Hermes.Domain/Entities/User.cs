@@ -7,7 +7,7 @@ public class User
     public User(string username, string passwordHash)
     {
         if (string.IsNullOrWhiteSpace(username))
-        throw new ArgumentException("Username cannot be empty.");
+            throw new ArgumentException("Username cannot be empty.");
         Username = username.ToLower();
         PasswordHash = passwordHash;
         CreatedAt = DateTime.UtcNow;

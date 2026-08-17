@@ -4,13 +4,9 @@ using MongoDB.Driver;
 
 namespace hermes_api.Hermes.Infrastructure.Repositories;
 
-public class MongoUserRepository : IUserRepository
+public class MongoUserRepository(IMongoDatabase database) : IUserRepository
 {
-    private readonly IMongoCollection<User> _collection;
-    public MongoUserRepository(IMongoDatabase database)
-        {
-            _collection = database.GetCollection<User>("users");
-        }
+    private readonly IMongoCollection<User> _collection = database.GetCollection<User>("users");
 
     public async Task<User?> GetByUsernameAsync(string username)
     {

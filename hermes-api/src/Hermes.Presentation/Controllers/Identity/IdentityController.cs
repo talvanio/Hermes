@@ -1,5 +1,6 @@
 using hermes_api.Hermes.Application.Identity;
 
+namespace hermes_api.Hermes.Presentation.Controllers.Identity;
 
 public static class IdentityController 
 {

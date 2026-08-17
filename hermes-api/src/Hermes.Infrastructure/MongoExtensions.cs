@@ -8,21 +8,23 @@ namespace hermes_api.Hermes.Infrastructure;
 
 public static class MongoExtensions
 {
+
+    private static MongoClient FetchMongoClientFromConnectionString(IConfiguration config)
+    {
+        var connectionString = config.GetConnectionString("DefaultConnection")
+                               ?? throw new InvalidOperationException("Database connection string is missing.");
+        var settings = MongoClientSettings.FromConnectionString(connectionString);
+        settings.ServerApi = new ServerApi(ServerApiVersion.V1);
+        return new MongoClient(settings);
+    }
+
     public static IServiceCollection InjectMongoDatabase(this IServiceCollection services, IConfiguration config)
-        {
-            var connectionString = config.GetConnectionString("DefaultConnection")
-                ?? throw new InvalidOperationException("Database connection string is missing.");
-
-            var settings = MongoClientSettings.FromConnectionString(connectionString);
-            settings.ServerApi = new ServerApi(ServerApiVersion.V1);
-
-            var client = new MongoClient(settings);
-            
-            services.AddSingleton<IMongoClient>(client);
-            services.AddScoped(sp => client.GetDatabase("HermesDB"));            
-            
-            return services;
-        }
+    {
+        var mongoClient = FetchMongoClientFromConnectionString(config);
+        services.AddSingleton<IMongoClient>(mongoClient);
+        services.AddScoped(sp => mongoClient.GetDatabase("HermesDB"));            
+        return services;
+    }
 
     public static void AddBsonMappings()
     {
