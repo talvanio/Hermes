@@ -5,12 +5,6 @@ namespace hermes_api.Hermes.Application.Identity;
 
 public class IdentityHandler(IUserRepository userRepository)
 {
-    private readonly IUserRepository _userRepository;
-    public IdentityHandler(IUserRepository userRepository)
-    {
-        _userRepository = userRepository;
-    }
-
     public async Task<bool> HandleLoginAsync(UserPlainCredentialsDTO plainCredentials)
     {
         var user = await userRepository.GetByUsernameAsync(plainCredentials.Username);
