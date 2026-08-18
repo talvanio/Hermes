@@ -7,7 +7,7 @@ public static class IdentityController
 
     public static void MapIdentityRoutes(this IEndpointRouteBuilder app) 
     {
-        app.MapPost("/login", async (UserPlainCredentialsDTO plainCredentials, IdentityHandler identityHandler) => 
+        app.MapPost("/login", async (UserPlainCredentialsDto plainCredentials, IdentityHandler identityHandler) => 
             {
                 if (await identityHandler.HandleLoginAsync(plainCredentials))
                 {
@@ -21,9 +21,9 @@ public static class IdentityController
             .WithTags("Authentication");
 
 
-        app.MapPost("/register", async (UserPlainCredentialsDTO plainCredentials, IdentityHandler identityHandler) => 
+        app.MapPost("/register", async (UserPlainCredentialsDto plainCredentials, IdentityHandler identityHandler) => 
             {
-                await identityHandler.HandleRegisterAsync(plainCredentials.Username, plainCredentials.Password);
+                await identityHandler.HandleRegisterAsync(plainCredentials);
             
                 return Results.Created($"/users/{plainCredentials.Username}", null);
             })
