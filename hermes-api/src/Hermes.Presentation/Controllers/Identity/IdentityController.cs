@@ -1,3 +1,4 @@
+using hermes_api.Hermes.Application;
 using hermes_api.Hermes.Application.Identity;
 
 namespace hermes_api.Hermes.Presentation.Controllers.Identity;
@@ -7,9 +8,9 @@ public static class IdentityController
 
     public static void MapIdentityRoutes(this IEndpointRouteBuilder app) 
     {
-        app.MapPost("/login", async (UserPlainCredentialsDto plainCredentials, IdentityHandler identityHandler) => 
+        app.MapPost("/login", async (LoginPlainCredentialsDto loginCredentials, IdentityHandler identityHandler) => 
             {
-                if (await identityHandler.HandleLoginAsync(plainCredentials))
+                if (await identityHandler.HandleLoginAsync(loginCredentials))
                 {
                     return Results.Ok("Login successful");
                 }
@@ -21,10 +22,9 @@ public static class IdentityController
             .WithTags("Authentication");
 
 
-        app.MapPost("/register", async (UserPlainCredentialsDto plainCredentials, IdentityHandler identityHandler) => 
+        app.MapPost("/register", async (RegisterPlainCredentialsDto plainCredentials, IdentityHandler identityHandler) => 
             {
                 await identityHandler.HandleRegisterAsync(plainCredentials);
-            
                 return Results.Created($"/users/{plainCredentials.Username}", null);
             })
             .Produces(StatusCodes.Status201Created)

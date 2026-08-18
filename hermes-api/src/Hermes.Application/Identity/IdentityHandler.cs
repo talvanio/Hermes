@@ -6,15 +6,15 @@ namespace hermes_api.Hermes.Application.Identity;
 
 public class IdentityHandler(IUserRepository userRepository)
 {
-    public async Task<bool> HandleLoginAsync(UserPlainCredentialsDto plainCredentials)
+    public async Task<bool> HandleLoginAsync(LoginPlainCredentialsDto loginCredentials)
     {
-        var user = await userRepository.GetByUsernameAsync(plainCredentials.Username);
+        var user = await userRepository.GetByUsernameAsync(loginCredentials.Username);
         
         return user != null && // TODO: user doesn't exists exception
-               BCrypt.Net.BCrypt.Verify(plainCredentials.Password, user.PasswordHash);
+               BCrypt.Net.BCrypt.Verify(loginCredentials.Password, user.PasswordHash);
     }
 
-    public async Task HandleRegisterAsync(UserPlainCredentialsDto plainCredentials)
+    public async Task HandleRegisterAsync(RegisterPlainCredentialsDto plainCredentials)
     {
         if (await userRepository.GetByUsernameAsync(plainCredentials.Username) != null)
         {

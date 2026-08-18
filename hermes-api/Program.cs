@@ -21,8 +21,8 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services.InjectMongoDatabase(builder.Configuration);
-builder.Services.AddScoped<IUserRepository, MongoUserRepository>();
+builder.Services.InjectPostgresDatabase(builder.Configuration);
+builder.Services.AddScoped<IUserRepository, PostgresUserRepository>();
 builder.Services.AddScoped<IdentityHandler>();
 
 builder.Services.AddOpenApi();
